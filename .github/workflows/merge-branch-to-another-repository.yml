@@ -19,9 +19,9 @@ jobs:
     - name: Merge changes into target repository
       run: |
         git remote add mygitactions https://github.com/ambikesh-cedcommerce/mygitactions.git # Change to the target repository's owner and name
-        git fetch mygitactions
-        git checkout -b merge-to-aother-branch mygitactions/main
+        git fetch mygitactions/main
+        git checkout main mygitactions/main
         git merge origin/${{ github.ref }}
-        git push mygitactions merge-to-aother-branch
+        git push mygitactions main
       env:
         GITHUB_TOKEN: ${{ secrets.MYGITHUBSECRETE }} # Personal Access Token with repository access
