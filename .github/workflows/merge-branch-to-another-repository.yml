@@ -1,44 +1,27 @@
-name: Merge Branch to Another Repository
+name: Merge Changes to Another Repository
 
 on:
   push:
     branches:
-      - main  # Change this to your source branch name
-
-env:
-  GH_TOKEN: ${{ secrets.MYGITHUBSECRETE }}
+      - main # Change this to the branch you want to monitor for changes
 
 jobs:
-  merge-branch:
+  merge_changes:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
+    - name: Checkout source repository
       uses: actions/checkout@v2
+      with:
+        repository: owner/source-repo # Change to the source repository's owner and name
+        ref: ${{ github.ref }}
 
-    - name: Set up Git
+    - name: Merge changes into target repository
       run: |
-        git config user.name "${{ secrets.GITHUB_ACTOR }}"
-        git config user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
-        git remote add target-repo https://github.com/ambikesh-cedcommerce/mygitactions.git
-
-    - name: Install GitHub CLI (gh)
-      run: |
-        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-        sudo apt-add-repository https://cli.github.com/packages
-        sudo apt update
-        sudo apt install gh
-
-    - name: Authenticate with Personal Access Token
-      run: |
-        unset GH_TOKEN
-        echo $GH_TOKEN | gh auth login --with-token
-
-    - name: Fetch Target Repository Branch
-      run: git fetch target-repo main:main  # Replace 'main' with the source branch name
-
-    - name: Merge Branch
-      run: |
-        git checkout main  # Replace 'main' with the source branch name
-        git merge main  # Replace 'main' with the source branch name
-        git push origin main  # Replace 'main' with the source branch name
+        git remote add target-repo https://github.com/owner/target-repo.git # Change to the target repository's owner and name
+        git fetch target-repo
+        git checkout -b target-branch target-repo/target-branch
+        git merge origin/${{ github.ref }}
+        git push target-repo target-branch
+      env:
+        GITHUB_TOKEN: ${{ secrets.MYGITHUBSECRETE }} # Personal Access Token with repository access
