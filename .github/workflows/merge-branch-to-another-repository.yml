@@ -20,7 +20,7 @@ jobs:
       run: |
         git remote add mygitactions https://github.com/ambikesh-cedcommerce/mygitactions.git # Change to the target repository's owner and name
         git fetch mygitactions
-        git checkout -b new-branch mygitactions/main
+        git checkout -b merge-to-aother-branch mygitactions/main
         git merge origin/${{ github.ref }}
         git push mygitactions merge-to-aother-branch
       env:
