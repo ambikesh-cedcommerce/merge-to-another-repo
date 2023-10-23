@@ -13,7 +13,7 @@ jobs:
     - name: Checkout source repository
       uses: actions/checkout@v2
       with:
-        repository: https://github.com/ambikesh-cedcommerce/mygitactions # Change to the source repository's owner and name
+        repository: ambikesh-cedcommerce/mygitactions # Change to the source repository's owner and name
         ref: ${{ github.ref }}
 
     - name: Merge changes into target repository
