@@ -13,12 +13,12 @@ jobs:
     - name: Checkout source repository
       uses: actions/checkout@v2
       with:
-        repository: owner/source-repo # Change to the source repository's owner and name
+        repository: https://github.com/ambikesh-cedcommerce/mygitactions # Change to the source repository's owner and name
         ref: ${{ github.ref }}
 
     - name: Merge changes into target repository
       run: |
-        git remote add target-repo https://github.com/owner/target-repo.git # Change to the target repository's owner and name
+        git remote add target-repo https://github.com/ambikesh-cedcommerce/mygitactions.git # Change to the target repository's owner and name
         git fetch target-repo
         git checkout -b target-branch target-repo/target-branch
         git merge origin/${{ github.ref }}
