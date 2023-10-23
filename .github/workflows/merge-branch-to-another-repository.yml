@@ -18,7 +18,7 @@ jobs:
 
     - name: Merge changes into target repository
       run: |
-        git remote add mygitremote https://github.com/ambikesh-cedcommerce/mygitactions.git # Change to the target repository's owner and name
+        git remote add mygitremote https://github.com/ambikesh-cedcommerce/mygitactions.git
         git fetch mygitremote
         git checkout -b main_branch mygitremote/main
         git merge main
