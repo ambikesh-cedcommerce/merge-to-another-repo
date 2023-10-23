@@ -20,8 +20,8 @@ jobs:
       run: |
         git remote add mygitremote https://github.com/ambikesh-cedcommerce/mygitactions.git # Change to the target repository's owner and name
         git fetch mygitremote
-        git checkout -b main mygitremote/main
+        git checkout -b main_branch mygitremote/main
         git merge origin/${{ github.ref }}
-        git push mygitremote main
+        git push mygitremote main_branch
       env:
         GITHUB_TOKEN: ${{ secrets.MYGITHUBSECRETE }} # Personal Access Token with repository access
